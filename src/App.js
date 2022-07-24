@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import Invoice from './components/Invoice';
+
+export function randomNumber(fixed, random) {
+  return fixed + Math.floor(Math.random() * random)
+}
+
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ';
+
+export function generateString(length) {
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+export function findTop(element) {
+  var rec = document.getElementById(element).getBoundingClientRect();
+  return rec.top + window.scrollY;
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        [...Array(1)].map(() => {
+          return <Invoice rows={randomNumber(3, 4)} />
+        })
+      }
     </div>
   );
 }
